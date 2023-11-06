@@ -12,13 +12,14 @@ const requestHandler = (req, res) => {
         res.write('</html>');
         return res.end();
     }
+
     if (url === '/massage' && method === 'POST') {
         const body = [];
         req.on('data', (chunk) => {
             console.log(chunk);
             body.push(chunk);
         })
-        req.on('end', () => {
+        return req.on('end', () => {
             const parseBody = Buffer.concat(body).toString();
             const massage = parseBody.split('=')[1];
             console.log(parseBody);

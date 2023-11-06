@@ -5,10 +5,10 @@ const requestHandler = (req, res) => {
     const url = req.url;
     const method = req.method;
     if (url === '/') {
-        const data = fs.readFileSync('example.txt', 'utf8');
+        // const data = fs.readFileSync('example.txt', 'utf8');
         res.write('<html>');
         res.write('<head><title>First page</title></head>');
-        res.write(`<body><h4>${data}</h4> <form action="/massage" method ="POST"> <input type = "text" name="massage"> <button type="submit">Send</button></form></body>`);
+        res.write(`<body><h4> </h4> <form action="/massage" method ="POST"> <input type = "text" name="massage"> <button type="submit">Send</button></form></body>`);
         res.write('</html>');
         return res.end();
     }

@@ -1,22 +1,26 @@
 // const http = require('http');
-
+const path = require('path');
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const app = express();
 
-app.use((req, res, next) => {
-    console.log("in side the middle wear")
-    next();
+const adminRouter = require('./routes/admin');
+const shopRouter = require('./routes/shop');
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/admin', adminRouter);
+app.use(shopRouter);
+
+app.use('/', (req, res, next) => {
+    res.status(404).sendFile(path.join(__dirname, 'views', '404.html'))
 })
 
-app.use((req, res, next) => {
-    console.log("in side the  another middle wear")
-    res.send(' <h1>this is greating from express</h1>')
-})
+app.listen(4000);
 
 // const server = http.createServer(app);
-
 // server.listen(4000);
 // insteal of ablve two commited lins we can use
 
-app.listen(4000);
